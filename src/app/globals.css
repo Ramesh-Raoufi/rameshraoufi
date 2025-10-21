@@ -1,0 +1,213 @@
+@import "tailwindcss";
+
+/* Optional: Local @font-face declarations.
+   Avenir Next is a licensed font. Only enable these if you own the files.
+   Place files in /public/fonts/avenir-next and uncomment/update the src URLs. */
+/*
+@font-face {
+  font-family: "Avenir Next";
+  src: url("/fonts/avenir-next/AvenirNext-Regular.woff2") format("woff2"),
+       url("/fonts/avenir-next/AvenirNext-Regular.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Avenir Next";
+  src: url("/fonts/avenir-next/AvenirNext-Italic.woff2") format("woff2"),
+       url("/fonts/avenir-next/AvenirNext-Italic.woff") format("woff");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Avenir Next";
+  src: url("/fonts/avenir-next/AvenirNext-DemiBold.woff2") format("woff2"),
+       url("/fonts/avenir-next/AvenirNext-DemiBold.woff") format("woff");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Avenir Next";
+  src: url("/fonts/avenir-next/AvenirNext-DemiBoldItalic.woff2") format("woff2"),
+       url("/fonts/avenir-next/AvenirNext-DemiBoldItalic.woff") format("woff");
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Avenir Next";
+  src: url("/fonts/avenir-next/AvenirNext-Bold.woff2") format("woff2"),
+       url("/fonts/avenir-next/AvenirNext-Bold.woff") format("woff");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Avenir Next";
+  src: url("/fonts/avenir-next/AvenirNext-BoldItalic.woff2") format("woff2"),
+       url("/fonts/avenir-next/AvenirNext-BoldItalic.woff") format("woff");
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+}
+*/
+
+:root {
+  color-scheme: light;
+  --background: #f7f8fb;
+  --foreground: #101221;
+  --surface-primary: rgba(255, 255, 255, 0.82);
+  --surface-elevated: rgba(255, 255, 255, 0.92);
+  --surface-border: rgba(15, 23, 42, 0.12);
+  --surface-muted: rgba(15, 23, 42, 0.08);
+  --accent: #6366f1;
+  --accent-soft: rgba(99, 102, 241, 0.14);
+  --muted: rgba(15, 23, 42, 0.67);
+  --muted-strong: rgba(15, 23, 42, 0.85);
+  --glow-channel: 79 70 229;
+  --grid-color: rgba(15, 23, 42, 0.08);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --background: #05070f;
+    --foreground: #e8ecff;
+    --surface-primary: rgba(14, 19, 35, 0.74);
+    --surface-elevated: rgba(18, 26, 46, 0.82);
+    --surface-border: rgba(129, 140, 248, 0.28);
+    --surface-muted: rgba(148, 163, 184, 0.15);
+    --accent: #818cf8;
+    --accent-soft: rgba(129, 140, 248, 0.18);
+    --muted: rgba(226, 232, 255, 0.64);
+    --muted-strong: rgba(226, 232, 255, 0.85);
+    --glow-channel: 129 140 248;
+    --grid-color: rgba(129, 140, 248, 0.12);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+  }
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--background);
+  color: var(--foreground);
+  /* Use Tailwind's font-sans utility (configured in tailwind.config.ts). */
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(circle at 10% 15%, rgb(var(--glow-channel) / 0.18), transparent 50%),
+    radial-gradient(circle at 85% 10%, rgba(45, 212, 191, 0.16), transparent 52%),
+    radial-gradient(circle at 80% 85%, rgba(244, 114, 182, 0.2), transparent 55%),
+    linear-gradient(180deg, rgba(5, 7, 15, 0.96), rgba(5, 7, 15, 0.98));
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(circle at center, black 0%, transparent 70%);
+  pointer-events: none;
+}
+
+@media (prefers-color-scheme: light) {
+  body::before {
+    background:
+      radial-gradient(circle at 15% 20%, rgba(79, 70, 229, 0.15), transparent 55%),
+      radial-gradient(circle at 80% 15%, rgba(59, 130, 246, 0.12), transparent 50%),
+      radial-gradient(circle at 70% 85%, rgba(236, 72, 153, 0.16), transparent 60%),
+      linear-gradient(180deg, rgba(247, 248, 251, 0.95), rgba(247, 248, 251, 0.98));
+  }
+
+  body::after {
+    mask-image: radial-gradient(circle at center, black 0%, transparent 80%);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.glass-surface {
+  background-color: var(--surface-primary);
+  border: 1px solid var(--surface-border);
+  box-shadow:
+    0 20px 60px -30px rgba(15, 23, 42, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.glass-surface-elevated {
+  background-color: var(--surface-elevated);
+  border: 1px solid var(--surface-border);
+  box-shadow:
+    0 25px 70px -35px rgba(15, 23, 42, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.surface-muted {
+  background-color: var(--surface-muted);
+}
+
+.accent-ring {
+  box-shadow: 0 0 0 1px rgb(var(--glow-channel) / 0.2),
+    0 15px 35px -20px rgb(var(--glow-channel) / 0.6);
+}
+
+.glow-underline::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  height: 2px;
+  width: 0;
+  transform: translateX(-50%);
+  border-radius: 9999px;
+  background: rgb(var(--glow-channel));
+  opacity: 0.65;
+  transition: width 0.24s ease, opacity 0.24s ease;
+}
+
+.glow-underline:hover::after,
+.glow-underline:focus-visible::after {
+  width: 100%;
+  opacity: 1;
+}
+
+.radial-mask {
+  mask-image: radial-gradient(circle at center, black, transparent 70%);
+}
+
+.hover-accent-ring {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-accent-ring:hover,
+.hover-accent-ring:focus-visible {
+  box-shadow: 0 0 0 1px rgb(var(--glow-channel) / 0.25),
+    0 22px 55px -25px rgb(var(--glow-channel) / 0.65);
+}
+
+.hover-accent-ring:focus-visible {
+  outline: none;
+}
