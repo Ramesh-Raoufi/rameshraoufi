@@ -7,7 +7,7 @@ const baseUrl =
   personalInfo.portfolio?.trim().replace(/\/+$/, "") || DEFAULT_BASE_URL;
 
 export const dynamic = "force-static";
-export const revalidate = 60 * 60 * 24;
+export const revalidate = 86400;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
