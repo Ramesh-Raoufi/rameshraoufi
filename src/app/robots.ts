@@ -6,6 +6,8 @@ const DEFAULT_BASE_URL = "https://rameshraoufi.me";
 const baseUrl =
   personalInfo.portfolio?.trim().replace(/\/+$/, "") || DEFAULT_BASE_URL;
 
+export const revalidate = 0;
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
