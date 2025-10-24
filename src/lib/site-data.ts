@@ -22,7 +22,7 @@ export const personalInfo = {
   ],
   github: githubProfiles[0].url,
   githubProfiles,
-  portfolio: "https://rameshraoufi.netlify.app",
+  portfolio: "https://rameshraoufi.me",
   email: "rameshraoufi1@gmail.com",
   summary:
     "Product-minded frontend engineer who pairs design systems and AI-assisted delivery to ship multilingual experiences that feel carefully crafted.",
@@ -212,16 +212,37 @@ export const aiHighlights = {
   tools: ["OpenAI", "Claude", "Cursor", "V0", "LangChain", "Zapier"],
 };
 
-export function generateJsonLd() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name: personalInfo.name,
-    jobTitle: personalInfo.title,
-    url: personalInfo.portfolio,
-    sameAs: personalInfo.githubProfiles.map((profile) => profile.url),
-    homeLocation: personalInfo.location,
-    knowsAbout: [...skills.frontend, ...skills.backend, ...skills.other],
-    alumniOf: education.map((item) => item.school),
-  };
+export function generateJsonLd(baseUrl?: string) {
+  const fallbackUrl = "https://rameshraoufi.me";
+  const resolvedBase =
+    typeof baseUrl === "string" && baseUrl.length > 0
+      ? baseUrl
+      : personalInfo.portfolio?.trim() || fallbackUrl;
+  const normalizedBase = resolvedBase.replace(/\/+$/, "");
+
+  return [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: personalInfo.name,
+      jobTitle: personalInfo.title,
+      url: resolvedBase,
+      sameAs: personalInfo.githubProfiles.map((profile) => profile.url),
+      homeLocation: personalInfo.location,
+      knowsAbout: [...skills.frontend, ...skills.backend, ...skills.other],
+      alumniOf: education.map((item) => item.school),
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      itemListElement: socialLinks.map((link, index) => ({
+        "@type": "SiteNavigationElement",
+        position: index + 1,
+        name: link.label,
+        url: link.href.startsWith("#")
+          ? `${normalizedBase}${link.href}`
+          : link.href,
+      })),
+    },
+  ];
 }
