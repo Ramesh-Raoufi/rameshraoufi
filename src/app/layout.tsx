@@ -21,6 +21,7 @@ export const metadata: Metadata = {
   title: `${personalInfo.name} - ${personalInfo.title}`,
   description: personalInfo.summary,
   applicationName: personalInfo.shortName,
+  generator: "Next.js 15",
   referrer: "origin-when-cross-origin",
   creator: personalInfo.name,
   publisher: personalInfo.name,
@@ -31,9 +32,19 @@ export const metadata: Metadata = {
     address: true,
   },
   authors: [{ name: personalInfo.name }],
+  icons: {
+    icon: [
+      { url: "/favicon.ico", rel: "icon" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    shortcut: ["/favicon.ico"],
+  },
   keywords: [
     personalInfo.name,
     personalInfo.shortName,
+    "Ramesh Raoufi",
+    "Ahmad Ramesh Raoufi",
+    "Ahmad Ramesh",
     personalInfo.title,
     personalInfo.location,
     "Next.js",
@@ -65,6 +76,8 @@ export const metadata: Metadata = {
     title: `${personalInfo.name} - ${personalInfo.title}`,
     description: personalInfo.summary,
     images: [ogImagePath],
+    creator: personalInfo.shortName,
+    site: personalInfo.shortName,
   },
   robots: {
     index: true,
@@ -79,8 +92,27 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "/",
+    languages: {
+      "en-US": "/",
+    },
   },
   metadataBase: metadataBaseUrl,
+  appleWebApp: {
+    capable: true,
+    title: personalInfo.shortName,
+    statusBarStyle: "black-translucent",
+  },
+  other: {
+    HandheldFriendly: "True",
+    MobileOptimized: "width",
+    "msapplication-TileColor": "#05070f",
+  },
+  appLinks: {
+    web: {
+      url: sanitizedPortfolioUrl,
+      should_fallback: true,
+    },
+  },
 };
 
 export const viewport: Viewport = {
@@ -102,7 +134,7 @@ export default function RootLayout({
   );
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -110,12 +142,6 @@ export default function RootLayout({
         />
       </head>
       <body className={`${geistMono.variable} antialiased font-sans`}>
-        <a
-          href="#main-content"
-          className="pointer-events-auto fixed left-4 top-4 z-[60] -translate-y-full rounded-full bg-[color:var(--foreground)] px-4 py-2 text-sm font-medium text-[color:var(--background)] shadow-lg transition focus-visible:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400/70"
-        >
-          Skip to main content
-        </a>
         <Navbar />
         {children}
       </body>
