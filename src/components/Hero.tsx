@@ -69,6 +69,14 @@ export function Hero() {
                     GitHub @{profile.username}
                   </a>
                 ))}
+                <a
+                  href={personalInfo.linkedin}
+                  className="surface-muted rounded-full px-6 py-2 font-medium text-foreground/80 transition hover:text-foreground"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  LinkedIn
+                </a>
               </div>
               <div className="grid gap-4 text-left text-xs text-foreground/70 sm:grid-cols-2 lg:grid-cols-4">
                 {metricCards.map((metric) => (

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rameshraoufi.me/sitemap.xml
+Host: rameshraoufi.me

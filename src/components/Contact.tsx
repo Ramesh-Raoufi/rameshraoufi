@@ -31,6 +31,14 @@ export function Contact() {
               GitHub @{profile.username}
             </a>
           ))}
+          <a
+            href={personalInfo.linkedin}
+            className="glow-underline w-fit text-foreground/80 transition hover:text-foreground"
+            target="_blank"
+            rel="noreferrer"
+          >
+            LinkedIn
+          </a>
         </div>
       </div>
     </div>

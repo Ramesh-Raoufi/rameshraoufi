@@ -22,6 +22,7 @@ export const personalInfo = {
   ],
   github: githubProfiles[0].url,
   githubProfiles,
+  linkedin: "https://www.linkedin.com/in/ahmad-ramesh-raoufi/",
   portfolio: "https://rameshraoufi.me",
   email: "rameshraoufi1@gmail.com",
   summary:
@@ -195,6 +196,7 @@ export const socialLinks = [
     label: `GitHub (${profile.username})`,
     href: profile.url,
   })),
+  { label: "LinkedIn", href: personalInfo.linkedin },
   { label: "Projects", href: "#projects" },
   { label: "Experience", href: "#experience" },
   { label: "Skills", href: "#skills" },
@@ -227,7 +229,10 @@ export function generateJsonLd(baseUrl?: string) {
       name: personalInfo.name,
       jobTitle: personalInfo.title,
       url: resolvedBase,
-      sameAs: personalInfo.githubProfiles.map((profile) => profile.url),
+      sameAs: [
+        ...personalInfo.githubProfiles.map((profile) => profile.url),
+        personalInfo.linkedin,
+      ],
       homeLocation: personalInfo.location,
       knowsAbout: [...skills.frontend, ...skills.backend, ...skills.other],
       alumniOf: education.map((item) => item.school),
